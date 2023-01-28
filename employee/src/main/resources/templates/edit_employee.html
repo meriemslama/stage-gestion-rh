@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>employees </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">employees</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/employees}">employees</a>
+      </li>
+     
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">update employees </h1>
+				<div class="card-body">
+					<form th:action="@{/employees/{id}(id=${employee.id})}" th:object="${employee}" method="post">
+						<div class="form-group">
+							<label>employee name</label>
+							<input type="text"name="nom" th:field="*{nom}"placeholder="entrer le nom de employee"class="form-control"/>
+							
+						</div>
+						<div class="form-group">
+							<label>employee prenom</label>
+							<input type="number"name="prenom" th:field="*{prenom}"placeholder="entrer le prenom de employee"class="form-control"/>
+							
+						</div>
+						<div class="form-group">
+							<label>employee cin</label>
+							<input type="number"name="cin" th:field="*{cin}"placeholder="entrer le cin de employee"class="form-control"/>
+							
+						</div>
+						<div class="form-group">
+							<label>employee numdept</label>
+							<input type="number"name="numdept" th:field="*{numdept}"placeholder="entrer le dept de employee"class="form-control"/>
+							
+						</div>
+						
+						<div class="footer-body">
+							<button type="submit"class="btn btn-primary">submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>
