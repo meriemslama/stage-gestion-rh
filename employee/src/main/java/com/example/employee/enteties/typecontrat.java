@@ -16,15 +16,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //le produit est une classe que est va stockee dans db
 @Entity
-public class departement {
+public class typecontrat {
 	//id est cle primaire
 	@Id
 	//id est generer automatique par spring : auto increment
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idDept;
-	private String nomDept;
-	@OneToMany(mappedBy = "departement")
-	Collection <employee> employees =new ArrayList <> ();
+	private long id;
+	private String type;
+	@OneToMany(mappedBy = "typecontrat")
+	Collection <contrat> contrat =new ArrayList <> ();
 	
 
 	

@@ -9,6 +9,7 @@ import com.example.employee.enteties.employee;
 
 
 
+
 public interface empservice  {
 	ResponseEntity<Object> saveEmployee(employee e);
 	

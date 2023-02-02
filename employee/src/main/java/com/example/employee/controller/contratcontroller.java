@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.employee.enteties.departement;
-import com.example.employee.services.deptservice;
+import com.example.employee.enteties.contrat;
+import com.example.employee.services.contratservice;
 
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/departements")
-public class deptcontroller {
+@RequestMapping("/contrats")
+public class contratcontroller {
 
 	@Autowired
-	private deptservice departementservice;
+	private contratservice contratservice;
 
-	public deptcontroller(deptservice departementservice) {
+	public contratcontroller(contratservice contratservice) {
 		super();
-		this.departementservice = departementservice;
+		this.contratservice = contratservice;
 	}
 
 	@GetMapping("/all")
-    public List<departement> Alldepartements() {
-        List<departement> depts = departementservice.getallDepartements();
-        return depts;
+    public List<contrat> Allcontrats() {
+        List<contrat> conts = contratservice.getallContrats();
+        return conts;
     }
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
@@ -45,8 +45,8 @@ public class deptcontroller {
 		
 	}*/
     @PostMapping("/add")
-    public ResponseEntity<Object> adddept(@RequestBody departement dept) {
-    return departementservice.saveDepartement(dept);
+    public ResponseEntity<Object> addcontrat(@RequestBody contrat cont) {
+    return contratservice.saveContrat(cont);
 }
   /* @GetMapping("/departements/edit/{id}")
 	public String editdepartementform(@PathVariable Long id , Model model){
@@ -57,19 +57,19 @@ public class deptcontroller {
 	}*/
    
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updatedept(@RequestBody departement dept, @PathVariable long id) {
-        return departementservice.updateDepartement(id, dept);
+    public ResponseEntity<Object> updatedept(@RequestBody contrat cont, @PathVariable long id) {
+        return contratservice.updateContrat(id, cont);
     }
 	
 
     @DeleteMapping("/delete/{id}")
-    public void deletedept(@PathVariable long id) {
-      departementservice.deletDepartementbyid(id);
+    public void deletecontrat(@PathVariable long id) {
+      contratservice.deletContratbyid(id);
   }
 
   @GetMapping("/get/{id}")
-  public departement finddept(@PathVariable long id) {
-      return departementservice.getDepartement(id);
+  public contrat findcontrat(@PathVariable long id) {
+      return contratservice.getContrat(id);
   }
 
 

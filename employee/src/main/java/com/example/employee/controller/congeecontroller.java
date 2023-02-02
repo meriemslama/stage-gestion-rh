@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.employee.enteties.departement;
-import com.example.employee.services.deptservice;
+import com.example.employee.enteties.congee;
+import com.example.employee.services.congeeservice;
 
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/departements")
-public class deptcontroller {
+@RequestMapping("/congees")
+public class congeecontroller {
 
 	@Autowired
-	private deptservice departementservice;
+	private congeeservice congeeservice;
 
-	public deptcontroller(deptservice departementservice) {
+	public congeecontroller(congeeservice congeeservice) {
 		super();
-		this.departementservice = departementservice;
+		this.congeeservice = congeeservice;
 	}
 
 	@GetMapping("/all")
-    public List<departement> Alldepartements() {
-        List<departement> depts = departementservice.getallDepartements();
-        return depts;
+    public List<congee> Allcongees() {
+        List<congee> congs = congeeservice.getallCongees();
+        return congs;
     }
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
@@ -45,8 +45,8 @@ public class deptcontroller {
 		
 	}*/
     @PostMapping("/add")
-    public ResponseEntity<Object> adddept(@RequestBody departement dept) {
-    return departementservice.saveDepartement(dept);
+    public ResponseEntity<Object> adddcong(@RequestBody congee cong) {
+    return congeeservice.savecongee(cong);
 }
   /* @GetMapping("/departements/edit/{id}")
 	public String editdepartementform(@PathVariable Long id , Model model){
@@ -57,19 +57,19 @@ public class deptcontroller {
 	}*/
    
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updatedept(@RequestBody departement dept, @PathVariable long id) {
-        return departementservice.updateDepartement(id, dept);
+    public ResponseEntity<Object> updatecongee(@RequestBody congee cong, @PathVariable long id) {
+        return congeeservice.updateCongee(id, cong);
     }
 	
 
     @DeleteMapping("/delete/{id}")
-    public void deletedept(@PathVariable long id) {
-      departementservice.deletDepartementbyid(id);
+    public void deletecongee(@PathVariable long id) {
+      congeeservice.deletCongeebyid(id);
   }
 
   @GetMapping("/get/{id}")
-  public departement finddept(@PathVariable long id) {
-      return departementservice.getDepartement(id);
+  public congee findcongee(@PathVariable long id) {
+      return congeeservice.getCongee(id);
   }
 
 

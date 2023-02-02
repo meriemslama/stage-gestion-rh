@@ -1,11 +1,12 @@
 package com.example.employee.enteties;
 
+import java.util.ArrayList;
+import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
@@ -15,25 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class employee {
+public class typecongee {
 	  @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
   
    private long Id;
-   private String nom;
-   private String prenom;
-   private long cin;
-   private String poste;
-   //private int numdept;
-   @ManyToOne
-   @JsonIgnore
-   departement departement;
-   @ManyToOne
-   @JsonIgnore
-   congee congee;
-   @ManyToOne
-   @JsonIgnore
-   contrat contrat;
+   private String type;
+   
+   
+	@OneToMany(mappedBy = "typecongee")
+	Collection <congee> congee =new ArrayList <> ();
+
+
+   
+
+
 
 
 

@@ -8,6 +8,8 @@ import com.example.employee.enteties.departement;
 
 
 
+
+
 public interface deptservice  {
 	ResponseEntity<Object> saveDepartement(departement d);
 	

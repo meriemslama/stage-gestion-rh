@@ -14,27 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.employee.enteties.departement;
-import com.example.employee.services.deptservice;
+import com.example.employee.enteties.typecongee;
+import com.example.employee.enteties.typecontrat;
+import com.example.employee.services.typecontratservice;
 
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/departements")
-public class deptcontroller {
+@RequestMapping("/type/contrats")
+public class typecontratcontroller {
 
 	@Autowired
-	private deptservice departementservice;
+	private typecontratservice typecontratservice;
 
-	public deptcontroller(deptservice departementservice) {
+	public typecontratcontroller(typecontratservice typecontratservice) {
 		super();
-		this.departementservice = departementservice;
+		this.typecontratservice = typecontratservice;
 	}
 
 	@GetMapping("/all")
-    public List<departement> Alldepartements() {
-        List<departement> depts = departementservice.getallDepartements();
-        return depts;
+    public List<typecontrat> Alltypecontrat() {
+        List<typecontrat> tconts = typecontratservice.getalltypescontrat();
+        return tconts;
     }
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
@@ -45,8 +46,8 @@ public class deptcontroller {
 		
 	}*/
     @PostMapping("/add")
-    public ResponseEntity<Object> adddept(@RequestBody departement dept) {
-    return departementservice.saveDepartement(dept);
+    public ResponseEntity<Object> addtypecontrat(@RequestBody typecontrat tcont) {
+    return typecontratservice.saveTypeContrat(tcont);
 }
   /* @GetMapping("/departements/edit/{id}")
 	public String editdepartementform(@PathVariable Long id , Model model){
@@ -57,19 +58,19 @@ public class deptcontroller {
 	}*/
    
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updatedept(@RequestBody departement dept, @PathVariable long id) {
-        return departementservice.updateDepartement(id, dept);
+    public ResponseEntity<Object> updatetypecontrat(@RequestBody typecontrat tcont, @PathVariable long id) {
+        return typecontratservice.updateTypeContrat(id, tcont);
     }
 	
 
     @DeleteMapping("/delete/{id}")
-    public void deletedept(@PathVariable long id) {
-      departementservice.deletDepartementbyid(id);
+    public void deletetypecontrat(@PathVariable long id) {
+    	typecontratservice.delettypeContratbyid(id);
   }
 
   @GetMapping("/get/{id}")
-  public departement finddept(@PathVariable long id) {
-      return departementservice.getDepartement(id);
+  public typecontrat findtypecongee(@PathVariable long id) {
+      return typecontratservice.gettypeContrat(id);
   }
 
 
