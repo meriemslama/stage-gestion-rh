@@ -3,12 +3,16 @@ package com.example.employee.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.employee.enteties.contrat;
 import com.example.employee.enteties.typecontrat;
 import com.example.employee.repos.typecontratrepository;
 
@@ -50,6 +54,7 @@ public class typecontratserviceimp implements typecontratservice{
          .findById(id)
          .ifPresentOrElse(tcont -> {
         	 tcont.setType(tc.getType());
+        	 tcont.setFormat(tc.getFormat());
         	 tcont.setContrat(tc.getContrat());
      
         	
@@ -85,6 +90,18 @@ public class typecontratserviceimp implements typecontratservice{
 		//List<departement>departements=new ArrayList<>();
 		return typecontratrepository.findAll();
 		// return departements;
+	}
+	@Override
+	public Page<typecontrat> getalltypecontrats(int page ,int size) {
+		//List<departement>departements=new ArrayList<>();
+		Pageable pages=PageRequest.of(page, size);
+		return typecontratrepository.findAll(pages);
+		// return departements;
+	}
+	
+	public Page<typecontrat> findByKeyword( String Keyword, int page, int size) {
+		Pageable pages=PageRequest.of(page, size);
+		return typecontratrepository.findByKeyword(Keyword,pages);
 	}
 	
 

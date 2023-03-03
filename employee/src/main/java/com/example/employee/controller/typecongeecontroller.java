@@ -3,6 +3,7 @@ package com.example.employee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.employee.enteties.congee;
 import com.example.employee.enteties.typecongee;
 import com.example.employee.services.typecongeeservice;
 
@@ -36,6 +38,31 @@ public class typecongeecontroller {
         List<typecongee> tcongs = typecongeeservice.getalltypescongees();
         return tcongs;
     }
+	
+	@GetMapping("/all/{page}/{size}")
+    public Page<typecongee> Alltypecongee(@PathVariable int page , @PathVariable int size) {
+    	Page<typecongee> cnts = typecongeeservice.getalltypecongee(page, size);
+        return cnts;
+    }
+	
+	@GetMapping("/all/search/{keyword}/{page}/{size}")
+	public Page<typecongee> findByKeyword(@PathVariable String keyword,@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		
+			return typecongeeservice.findByKeyword(keyword, page, size);
+		
+		
+		
+		
+	}
+	@GetMapping("/all/search//{page}/{size}")
+	public Page<typecongee> getallemployeesbysearchnull(@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		return typecongeeservice.getalltypecongee(page, size);}
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
 		

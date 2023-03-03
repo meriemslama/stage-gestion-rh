@@ -3,6 +3,7 @@ package com.example.employee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +38,30 @@ public class typecontratcontroller {
         List<typecontrat> tconts = typecontratservice.getalltypescontrat();
         return tconts;
     }
+    @GetMapping("/all/{page}/{size}")
+    public Page<typecontrat> Alltypecongee(@PathVariable int page , @PathVariable int size) {
+    	Page<typecontrat> cnts = typecontratservice.getalltypecontrats(page, size);
+        return cnts;
+    }
+	
+	@GetMapping("/all/search/{keyword}/{page}/{size}")
+	public Page<typecontrat> findByKeyword(@PathVariable String keyword,@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		
+			return typecontratservice.findByKeyword(keyword, page, size);
+		
+		
+		
+		
+	}
+	@GetMapping("/all/search//{page}/{size}")
+	public Page<typecontrat> getallemployeesbysearchnull(@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		return typecontratservice.getalltypecontrats(page, size);}
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
 		

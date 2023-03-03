@@ -25,14 +25,15 @@ public class congee {
    private long Id;
    private String dateDebut;
    private String dateFin;
-	@OneToMany(mappedBy = "congee")
-	Collection <employee> employees =new ArrayList <> ();
+	
 	@ManyToOne
 	@JsonIgnore
 	typecongee typecongee;
 
    
-
+	 @ManyToOne
+	   @JsonIgnore
+	   employee employee;
 
 
 

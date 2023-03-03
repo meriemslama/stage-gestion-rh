@@ -27,9 +27,14 @@ public class contrat {
 	private long id;
 	private String dateDebut;
 	private String dateFin;
+	private String contenu;
 
-	@OneToMany(mappedBy = "contrat")
-	Collection <employee> employees =new ArrayList <> ();
+	
+	
+	
+	 @ManyToOne
+	   @JsonIgnore
+	   employee employee;
 	@ManyToOne
 	@JsonIgnore
 	typecontrat typecontrat;

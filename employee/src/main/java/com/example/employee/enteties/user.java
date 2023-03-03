@@ -23,26 +23,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //le produit est une classe que est va stockee dans db
 @Entity
-public class departement {
+public class user {
 	//id est cle primaire
 	@Id
 	//id est generer automatique par spring : auto increment
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idDept;
-	private String nomDept;
-	private String status;
-	private String description;
-	@OneToMany(mappedBy = "departement")
+	private long idt;
+	private String login;
+	private String pw;
 	
-	Collection <employee> employees =new ArrayList <> ();
 	
-
-	/*@OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "emprespid", nullable = false)
-    private employee user;*/
 	@OneToOne(cascade = CascadeType.ALL)
-	/*  @JsonIgnore*/
-	@JoinColumn(name = "respid",referencedColumnName="id")
+	  @JsonIgnore
+	@JoinColumn(name = "emp",referencedColumnName="id")
 	private employee employee;
 	
 	

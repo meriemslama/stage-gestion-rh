@@ -3,6 +3,7 @@ package com.example.employee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.employee.enteties.contrat;
+import com.example.employee.enteties.departement;
 import com.example.employee.services.contratservice;
 
 
@@ -36,6 +38,34 @@ public class contratcontroller {
         List<contrat> conts = contratservice.getallContrats();
         return conts;
     }
+
+	@GetMapping("/all/{page}/{size}")
+    public Page<contrat> Allcontrat(@PathVariable int page , @PathVariable int size) {
+    	Page<contrat> cnts = contratservice.getallcontrats(page, size);
+        return cnts;
+    }
+	
+	@GetMapping("/all/search/{keyword}/{page}/{size}")
+	public Page<contrat> findByKeyword(@PathVariable String keyword,@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		
+			return contratservice.findByKeyword(keyword, page, size);
+		
+		
+		
+		
+	}
+	@GetMapping("/all/search//{page}/{size}")
+	public Page<contrat> getallemployeesbysearchnull(@PathVariable int page , @PathVariable int size){
+		//return produitservice.getallproduits();
+		//model.addAttribute("listEmployees",employeeservice.getallEmployees());
+		
+		return contratservice.getallcontrats(page, size);
+		
+		
+	}
 	/*@GetMapping("/departements/new")
 	public String creatdepartementform(Model model){
 		
@@ -44,9 +74,9 @@ public class contratcontroller {
 		return "create_departement";
 		
 	}*/
-    @PostMapping("/add")
-    public ResponseEntity<Object> addcontrat(@RequestBody contrat cont) {
-    return contratservice.saveContrat(cont);
+    @PostMapping("/add/{id}/{idemp}")
+    public ResponseEntity<Object> addcontrat(@RequestBody contrat cont,@PathVariable long id,@PathVariable long idemp) {
+    return contratservice.saveContrat(cont,id,idemp);
 }
   /* @GetMapping("/departements/edit/{id}")
 	public String editdepartementform(@PathVariable Long id , Model model){
@@ -56,9 +86,9 @@ public class contratcontroller {
 		
 	}*/
    
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updatedept(@RequestBody contrat cont, @PathVariable long id) {
-        return contratservice.updateContrat(id, cont);
+    @PutMapping("/update/{id}/{idtype}/{idemp}")
+    public ResponseEntity<Object> updatedept(@RequestBody contrat cont, @PathVariable long id,@PathVariable long idtype,@PathVariable long idemp) {
+        return contratservice.updateContrat(id, cont,idtype,idemp);
     }
 	
 

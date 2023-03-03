@@ -1,8 +1,12 @@
 package com.example.employee.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.employee.enteties.departement;
+import com.example.employee.enteties.employee;
 import com.example.employee.repos.deptrepository;
 
 import jakarta.transaction.Transactional;
@@ -20,22 +25,32 @@ public class deptserviceimpl implements deptservice{
 
 	@Autowired
    deptrepository departementrepository;
+	employee employee;
+	
+	//com.example.employee.services.empservice empservice;
 	@Override
 	@CrossOrigin
 	@Transactional
+	//,long id
 	public ResponseEntity<Object> saveDepartement(departement d) {
+		//employee=empservice.getEmployee( id);
 		// TODO Auto-generated method stub
+		//employee=empservice.getEmployee(id);
+		//d.setEmployee(employee);
 		departementrepository
         .findById(d.getIdDept())
         .ifPresentOrElse(
                 dept -> {
                     throw new ResponseStatusException(HttpStatus.FOUND, "dept ID alredy exist");
                 }, () -> {
+                	//d.setEmployee(employee);
                 	departementrepository.save(d);
                 }
         );
 		  return ResponseEntity.ok(d);
 	}
+	
+  
 	@Override
 	public departement getDepartement(Long id) {
 		// TODO Auto-generated method stub
@@ -51,6 +66,8 @@ public class deptserviceimpl implements deptservice{
          .ifPresentOrElse(dept -> {
         	 dept.setNomDept(d.getNomDept());
         	 dept.setEmployees(d.getEmployees());
+        	 dept.setStatus(d.getStatus());
+        	 dept.setDescription(d.getDescription());
         	
              departementrepository.save(dept);
          }, () -> {
@@ -80,11 +97,26 @@ public class deptserviceimpl implements deptservice{
 	
 
 	@Override
-	public List<departement> getallDepartements() {
+	public Page<departement> getallDepartements(int page ,int size) {
 		//List<departement>departements=new ArrayList<>();
+		Pageable pages=PageRequest.of(page, size);
+		return departementrepository.findAll(pages);
+		// return departements;
+	}
+	public List<departement> allDepartements() {
+	
 		return departementrepository.findAll();
 		// return departements;
 	}
+	public Page<departement> findByKeyword( String Keyword, int page, int size) {
+		Pageable pages=PageRequest.of(page, size);
+		return departementrepository.findByKeyword(Keyword,pages);
+	}
+	 public List<String> getAllDepartments() {
+	        List<departement> departments = departementrepository.findAll();
+	        return departments.stream().map(departement::getNomDept).collect(Collectors.toList());
+	    }
+
 	
 
 }
